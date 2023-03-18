@@ -23,24 +23,31 @@ public class ControlAcheterProduit {
 		return false;
 	}
 	
+	
 	public String[] listeVendeur(String produit) {
 		String[] infosMarche = village.donnerEtatMarche();
-		String[] vendeurListe = null;
-		int j=0;
+		String[] vendeurListe = new String[5];;
 		int k = 0;
 		for (int i = 0; i < infosMarche.length; i+=3) {
-			String vendeur = infosMarche[j];
+			String vendeur = infosMarche[i];
 			Etal produitVendeur = controlTrouverEtalVendeur.trouverEtalVendeur(vendeur);
 			if(produitVendeur.contientProduit(produit)) {
-				vendeurListe[k] = vendeur;	
+				vendeurListe[k] = vendeur;
 				k++;
 			}
 		}
 		return vendeurListe;
-		
 	}
-	public void acheterProduitVendeur(String nomVendeur, int quantite) {
+	
+	
+	public int acheterProduitVendeur(String nomVendeur, int quantite) {
 		Etal vendeur = controlTrouverEtalVendeur.trouverEtalVendeur(nomVendeur);
+		int quantiteAcheter = 0;
+		if(vendeur != null) {
+			quantiteAcheter = vendeur.acheterProduit(quantite);
+		}
+		
+		return quantiteAcheter;
 	}
 	
 }
